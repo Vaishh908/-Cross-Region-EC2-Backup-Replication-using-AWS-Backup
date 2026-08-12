@@ -19,8 +19,8 @@ Before starting the project, ensure the following requirements are available:
 - IAM permissions to use AWS Backup and EC2
 - AWS Backup service enabled
 - Two AWS regions:
-Primary: US East (N. Virginia) — us-east-1
-DR: US West (N. California) — us-west-1
+   - Primary: US East (N. Virginia) — us-east-1
+   - DR: US West (N. California) — us-west-1
 - Basic knowledge of EC2, EBS, IAM, and AWS Backup
 - Internet access for accessing the AWS Management Console
 
@@ -50,6 +50,28 @@ DR: US West (N. California) — us-west-1
 ---
 # Project Structure
 
+Cross-Region-EC2-Backup-Replication-AWS-Backup/
+│
+├── README.md
+│
+├── architecture/
+│   └── architecture-diagram.png
+│
+├── screenshots/
+│   ├── 01-ec2-instance.png
+│   ├── 02-primary-backup-vault.png
+│   ├── 03-dr-backup-vault.png
+│   ├── 04-backup-plan.png
+│   ├── 05-backup-rule.png
+│   ├── 06-cross-region-copy.png
+│   ├── 07-resource-assignment.png
+│   ├── 08-backup-job-completed.png
+│   ├── 09-primary-recovery-point.png
+│   ├── 10-copy-job-completed.png
+│   ├── 11-dr-recovery-point.png
+│   └── 12-scheduled-backup.png
+│
+└── .gitignore
 
 ---
 
