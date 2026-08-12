@@ -8,13 +8,31 @@ Cross-Region EC2 Backup Replication using AWS Backup is a disaster recovery solu
 
 ---
 
+# Prerequisites
+
+Before starting the project, ensure the following requirements are available:
+
+- AWS account with access to the AWS Management Console
+- Linux EC2 instance (t3.micro)
+- EC2 key pair for secure access
+- Amazon EBS volume attached to the EC2 instance
+- IAM permissions to use AWS Backup and EC2
+- AWS Backup service enabled
+- Two AWS regions:
+Primary: US East (N. Virginia) — us-east-1
+DR: US West (N. California) — us-west-1
+- Basic knowledge of EC2, EBS, IAM, and AWS Backup
+- Internet access for accessing the AWS Management Console
+
+---
+
 # Architecture Diagram
 
 <img width="1536" height="1024" alt="ChatGPT Image Aug 12, 2026, 06_51_29 PM" src="https://github.com/user-attachments/assets/f96042f5-808b-4490-809e-b7f036f1a5f8" />
 
 ---
 
-# AWS Services Used
+# Technologies Used
 
 | Technology        | Purpose                       |
 | ----------------- | ----------------------------- |
@@ -28,6 +46,10 @@ Cross-Region EC2 Backup Replication using AWS Backup is a disaster recovery solu
 | Cross-Region Copy | Disaster recovery replication |
 | Recovery Point    | Restore point                 |
 | Linux             | EC2 operating system          |
+
+---
+# Project Structure
+
 
 ---
 
@@ -44,21 +66,6 @@ The project uses two AWS regions.
 | Backup Vault      | Yes                   | Yes                     |
 | Recovery Point    | Yes                   | Yes                     |
 | Cross-Region Copy | Source                | Destination             |
-
----
-
-# EC2 Configuration
-
-The source EC2 instance used in this project:
-
-| Configuration    | Value                 |
-| ---------------- | --------------------- |
-| Operating System | Linux                 |
-| Instance Type    | `t3.micro`            |
-| Region           | `us-east-1`           |
-| Instance ID      | `i-04cfe745666331faf` |
-| Purpose          | Source EC2            |
-| Backup Method    | AWS Backup            |
 
 ---
 
@@ -678,31 +685,7 @@ Cross-region copy
 
 ---
 
-# Verification Checklist
-
-The following checklist was used to verify the project.
-
-| Verification                   | Status |
-| ------------------------------ | ------ |
-| EC2 instance created           | ✅      |
-| Linux OS                       | ✅      |
-| t3.micro instance              | ✅      |
-| Primary region configured      | ✅      |
-| DR region configured           | ✅      |
-| Primary Backup Vault created   | ✅      |
-| DR Backup Vault created        | ✅      |
-| Backup Plan created            | ✅      |
-| Daily Backup Rule created      | ✅      |
-| EC2 resource assigned          | ✅      |
-| IAM Default Backup Role        | ✅      |
-| On-demand backup tested        | ✅      |
-| Backup job completed           | ✅      |
-| Primary recovery point created | ✅      |
-| Cross-region copy configured   | ✅      |
-| DR recovery point created      | ✅      |
-| 7-day retention configured     | ✅      |
-
-Results
+# Results
 
 The project successfully demonstrated cross-region EC2 backup replication.
 
@@ -766,87 +749,6 @@ Status:
 Completed
 
 ---
-
-# Troubleshooting
-
-### Problem 1 - Recovery Point Not Showing
-
-If the recovery point is not immediately visible, check:
-
-AWS Backup
-→ Jobs
-→ Backup Jobs
-
-Verify that the job status is:
-
-Completed
-
-Do not check the recovery vault immediately while the backup job is still running.
-
-Refresh the page after the backup job completes.
-
-### Problem 2 - Copy Job Not Showing
-
-Cross-region copy can take additional time after the primary backup completes.
-
-Check:
-
-AWS Backup
-→ Jobs
-→ Copy Jobs
-
-Also verify:
-
-Destination Region:
-us-west-1
-
-Destination Vault:
-EC2-DR-Backup-Vault
-
-### Problem 3 - Duplicate CopyActions
-
-Error:
-
-Duplicate CopyActions provided in backupRule.
-
-Solution:
-
-Open the backup rule and make sure there is only one destination:
-
-us-west-1
-EC2-DR-Backup-Vault
-
-Remove duplicate copy actions and save the rule.
-
-### Problem 4 - Scheduled Backup Shows Future Date
-
-AWS Backup schedules are based on the configured schedule and current time.
-
-For example:
-
-Daily
-05:40 PM
-Asia/Calcutta
-
-The console may show the next execution as:
-
-Aug 13, 2026 at 17:40
-
-This is normal if today's scheduled execution time has already passed.
-
-# Backup Retention
-
-The project uses:
-
-7 days
-
-for the primary backup.
-
-The cross-region copied recovery point also uses:
-
-7 days
-
-Therefore, recovery points older than the configured retention period are automatically expired according to AWS Backup lifecycle management.
 
 # Conclusion :
 
