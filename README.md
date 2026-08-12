@@ -709,66 +709,9 @@ Cross-region copy
 
 # Results
 
-The project successfully demonstrated cross-region EC2 backup replication.
+The project successfully demonstrated cross-region EC2 backup replication using AWS Backup. The EC2 instance i-04cfe745666331faf was successfully backed up to the EC2-Primary-Backup-Vault in the us-east-1 (US East – N. Virginia) region. The backup job completed successfully with a Completed status, Success message, EC2 resource type, and a retention period of 7 days. A primary recovery point image/ami-00222ba82661e72f7 was also successfully generated.
 
-Primary Backup
-
-The EC2 instance:
-
-i-04cfe745666331faf
-
-was successfully backed up to:
-
-EC2-Primary-Backup-Vault
-
-in:
-
-us-east-1
-Backup Job
-
-The backup jobs completed successfully.
-
-Example:
-
-Status: Completed
-Message: Success
-Resource Type: EC2
-Retention: 7 days
-Primary Recovery Point
-
-A completed recovery point was generated.
-
-Example:
-
-image/ami-00222ba82661e72f7
-
-Status:
-
-Completed
-Cross-Region Replication
-
-The backup was copied from:
-
-US East (N. Virginia)
-us-east-1
-
-to:
-
-US West (N. California)
-us-west-1
-DR Recovery Point
-
-A recovery point was successfully available in:
-
-EC2-DR-Backup-Vault
-
-Example:
-
-image/ami-06e2ca6440b6a7f4a
-
-Status:
-
-Completed
+The recovery point was then successfully copied from US East (N. Virginia) – us-east-1 to US West (N. California) – us-west-1, demonstrating successful cross-region replication. The replicated recovery point image/ami-06e2ca6440b6a7f4a was successfully available in the EC2-DR-Backup-Vault with a Completed status. This confirms that the implemented AWS Backup solution provides a reliable cross-region disaster recovery mechanism, allowing the EC2 workload to be restored in the DR region if the primary region becomes unavailable.
 
 ---
 
