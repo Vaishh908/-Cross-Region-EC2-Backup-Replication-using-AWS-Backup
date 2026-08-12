@@ -14,7 +14,7 @@ Cross-Region EC2 Backup Replication using AWS Backup is a disaster recovery solu
 
 ---
 
-# Technologies Used
+## AWS Services Used
 
 | Technology        | Purpose                       |
 | ----------------- | ----------------------------- |
@@ -31,7 +31,7 @@ Cross-Region EC2 Backup Replication using AWS Backup is a disaster recovery solu
 
 ---
 
-# AWS Region Configuration
+## AWS Region Configuration
 
 The project uses two AWS regions.
 
