@@ -91,32 +91,11 @@ Configure the instance.
 
 Launch the instance.
 
----
-
-# Step 2 - Verify EC2 Instance
-
-After launching the EC2 instance, verify that the instance is running.
-
-The instance used in this project:
-
-Instance ID:
-i-04cfe745666331faf
-
-Instance type:
-
-t3.micro
-
-Operating system:
-
-Linux
-
-Region:
-
-us-east-1
+<img width="1919" height="979" alt="Screenshot 2026-08-12 172000" src="https://github.com/user-attachments/assets/a2f255bd-22d3-4dc9-84c8-57594390680f" />
 
 ---
 
-# Step 3 - Open AWS Backup
+# Step 2 - Open AWS Backup
 
 From the AWS Management Console, search:
 
@@ -129,9 +108,7 @@ us-east-1
 
 AWS Backup is used to automate the backup and cross-region replication process.
 
----
-
-# Step 4 - Create Primary Backup Vault
+ Create Primary Backup Vault
 
 Navigate to:
 
@@ -160,9 +137,11 @@ Primary Vault
 | Purpose       | Primary backup storage     |
 | Resource      | EC2                        |
 
+<img width="1920" height="1080" alt="Screenshot 2026-08-12 162914" src="https://github.com/user-attachments/assets/85953505-8f3c-4a16-bf26-55a5e2ae0ede" />
+
 ---
 
-# Step 5 - Create DR Backup Vault
+# Step 3 - Create DR Backup Vault
 
 Change the AWS region to:
 
@@ -190,9 +169,11 @@ DR Vault
 
 The DR vault is the destination for cross-region backup copies.
 
+<img width="1920" height="1080" alt="Screenshot 2026-08-12 163101" src="https://github.com/user-attachments/assets/72164a6c-1be8-45be-9a70-3cfff807e65f" />
+
 ---
 
-# Step 6 - Create Backup Plan
+# Step 4 - Create Backup Plan
 
 Return to:
 
@@ -216,9 +197,12 @@ Use the following configuration.
 Backup Plan
 EC2-Cross-Region-Backup-Plan
 
+<img width="1920" height="1080" alt="Screenshot 2026-08-12 164151" src="https://github.com/user-attachments/assets/9337b633-5724-4993-a61a-3cd8b66da083" />
+
+
 ---
 
-# Step 7 - Configure Backup Rule
+# Step 5 - Configure Backup Rule
 
 Create a backup rule:
 
@@ -264,9 +248,11 @@ Therefore, the schedule appears as:
 Daily at 05:40 PM
 Asia/Calcutta (UTC+05:30)
 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/8579ab49-99b7-49ef-b007-160f4f724d34" />
+
 ---
 
-# Step 8 - Configure Cross-Region Copy
+# Step 6- Configure Cross-Region Copy
 
 Inside the backup rule, locate:
 
@@ -331,9 +317,11 @@ Remove any duplicate copy action.
 
 Save the rule again.
 
+<img width="1920" height="1080" alt="Screenshot 2026-08-12 163101" src="https://github.com/user-attachments/assets/aaa007b9-76bf-4653-8f54-cd0d0d800fc3" />
+
 ---
 
-# Step 9 - Assign EC2 Resource
+# Step 7 - Assign EC2 Resource
 
 Open the backup plan:
 
@@ -375,15 +363,17 @@ The final assignment is:
 
 EC2-Backup-Assignment
         │
-        ▼
-EC2
+
+       EC2
         │
-        ▼
 i-04cfe745666331faf
+
+
+<img width="1920" height="1080" alt="Screenshot 2026-08-12 164721" src="https://github.com/user-attachments/assets/fda09137-0265-469c-93d6-789714484afe" />
 
 ---
 
-# Step 10 - Verify Backup Plan
+# Step 8 - Verify Backup Plan
 
 After creating the backup plan, the plan should show:
 
@@ -421,9 +411,11 @@ Final Backup Plan Configuration :
 | Backup Retention   | 7 days                       |
 | Copy Retention     | 7 days                       |
 
+<img width="1920" height="1080" alt="Screenshot 2026-08-12 164151" src="https://github.com/user-attachments/assets/d8581d77-e39c-4a47-9cd0-74195b874e88" />
+
 ---
 
-# Step 11 - Create On-Demand Backup
+# Step 9 - Create On-Demand Backup
 
 Before waiting for the scheduled backup, an on-demand backup can be created to test the configuration.
 
@@ -465,7 +457,7 @@ Start the backup.
 
 ---
 
-# Step 12 - Monitor Backup Job
+# Step 10 - Monitor Backup Job
 
 Navigate to:
 
@@ -510,9 +502,11 @@ EC2-Primary-Backup-Vault
 Retention:
 7 days
 
+<img width="1920" height="1080" alt="Screenshot 2026-08-12 175509" src="https://github.com/user-attachments/assets/d202e6bb-14e4-4cf6-936e-c2b9d711cebf" />
+
 ---
 
-# Step 13 - Verify Primary Recovery Point
+# Step 11 - Verify Primary Recovery Point
 
 Navigate to:
 
@@ -556,7 +550,7 @@ Completed
 
 ---
 
-# Step 14 - Verify Cross-Region Copy
+# Step 12 - Verify Cross-Region Copy
 
 Now switch to:
 
@@ -597,7 +591,12 @@ Cross-Region Copy
      │
      ▼
 DR Recovery Point
-Step 15 - Verify DR Recovery Point
+
+<img width="1920" height="1080" alt="Screenshot 2026-08-12 183858" src="https://github.com/user-attachments/assets/14583452-a8d0-47ef-bec7-cdc632af36ff" />
+
+---
+
+# Step 15 - Verify DR Recovery Point
 
 Switch to:
 
@@ -641,7 +640,13 @@ us-east-1
 to:
 
 us-west-1
-Step 16 - Verify Scheduled Backup
+
+<img width="1920" height="1080" alt="Screenshot 2026-08-12 184058" src="https://github.com/user-attachments/assets/29c40d02-9807-4ba7-aed8-a6a2667813d6" />
+
+
+---
+
+# Step 16 - Verify Scheduled Backup
 
 The backup plan was configured for daily execution.
 
@@ -669,49 +674,9 @@ This indicates that the schedule includes:
 EC2 backup
 Cross-region copy
 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d30b2eb6-1f61-45b5-b147-a09e3a73e9ae" />
+
 ---
-
-# Step 17 - Disaster Recovery
-
-If the primary EC2 instance becomes unavailable, the recovery point stored in:
-
-us-west-1
-
-can be used for disaster recovery.
-
-Navigate to:
-
-AWS Backup
-    ↓
-Backup vaults
-    ↓
-EC2-DR-Backup-Vault
-    ↓
-Recovery points
-
-Select the completed recovery point.
-
-Choose:
-
-Restore
-
-AWS Backup can then be used to restore the EC2 workload in the DR region.
-
-Conceptually:
-
-Primary EC2
-    │
-    X
-Failure
-    │
-    ▼
-DR Recovery Point
-    │
-    ▼
-Restore
-    │
-    ▼
-EC2 in us-west-1
 
 # Verification Checklist
 
