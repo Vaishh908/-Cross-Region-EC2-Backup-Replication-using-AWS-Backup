@@ -2,19 +2,19 @@
 
 ---
 
-##  Project Overview
+# Project Overview
 
 Cross-Region EC2 Backup Replication using AWS Backup is a disaster recovery solution designed to protect an Amazon EC2 instance by automatically creating scheduled backups and replicating them across AWS regions. In this project, a Linux-based t3.micro EC2 instance is deployed in the US East (N. Virginia) region (us-east-1), which acts as the primary region. AWS Backup is configured with a backup plan named EC2-Cross-Region-Backup-Plan and a daily backup rule named Daily-EC2-Backup. The backups are stored in the EC2-Primary-Backup-Vault with a 7-day retention period. AWS Backup then automatically copies the recovery point to the EC2-DR-Backup-Vault in the US West (N. California) region (us-west-1). The successful completion of backup jobs and the presence of recovery points in both regions verify that cross-region backup replication is working correctly. This architecture provides an additional layer of protection against EC2 instance failure, data loss, or a disruption in the primary AWS region, while allowing the replicated recovery point in the secondary region to be used for disaster recovery and restoration.
 
 ---
 
-## Architecture Diagram
+# Architecture Diagram
 
 <img width="1536" height="1024" alt="ChatGPT Image Aug 12, 2026, 06_51_29 PM" src="https://github.com/user-attachments/assets/f96042f5-808b-4490-809e-b7f036f1a5f8" />
 
 ---
 
-## AWS Services Used
+# AWS Services Used
 
 | Technology        | Purpose                       |
 | ----------------- | ----------------------------- |
@@ -31,7 +31,7 @@ Cross-Region EC2 Backup Replication using AWS Backup is a disaster recovery solu
 
 ---
 
-## AWS Region Configuration
+# AWS Region Configuration
 
 The project uses two AWS regions.
 
