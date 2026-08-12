@@ -50,6 +50,7 @@ Before starting the project, ensure the following requirements are available:
 ---
 # Project Structure
 
+```text
 Cross-Region-EC2-Backup-Replication-AWS-Backup/
 │
 ├── README.md
@@ -72,8 +73,7 @@ Cross-Region-EC2-Backup-Replication-AWS-Backup/
 │   └── 12-scheduled-backup.png
 │
 └── .gitignore
-
----
+```
 
 # AWS Region Configuration
 
