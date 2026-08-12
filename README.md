@@ -14,7 +14,7 @@ Cross-Region EC2 Backup Replication using AWS Backup is a disaster recovery solu
 
 ---
 
-## Technologies Used
+# Technologies Used
 
 | Technology        | Purpose                       |
 | ----------------- | ----------------------------- |
@@ -29,7 +29,9 @@ Cross-Region EC2 Backup Replication using AWS Backup is a disaster recovery solu
 | Recovery Point    | Restore point                 |
 | Linux             | EC2 operating system          |
 
-## AWS Region Configuration
+---
+
+# AWS Region Configuration
 
 The project uses two AWS regions.
 
@@ -43,7 +45,9 @@ The project uses two AWS regions.
 | Recovery Point    | Yes                   | Yes                     |
 | Cross-Region Copy | Source                | Destination             |
 
-## EC2 Configuration
+---
+
+# EC2 Configuration
 
 The source EC2 instance used in this project:
 
@@ -56,24 +60,11 @@ The source EC2 instance used in this project:
 | Purpose          | Source EC2            |
 | Backup Method    | AWS Backup            |
 
-## Implementation Steps
+---
 
-### Step 1 - Create EC2 Instance
+# Implementation Steps
 
-Login to the AWS Management Console.
-
-Search for:
-
-EC2
-
-Open the EC2 service.
-
-Select:
-
-Launch Instance
-
-Configure the instance.
-Step 1 - Create EC2 Instance
+# Step 1 - Create EC2 Instance
 
 Login to the AWS Management Console.
 
@@ -100,7 +91,9 @@ Configure the instance.
 
 Launch the instance.
 
-Step 2 - Verify EC2 Instance
+---
+
+# Step 2 - Verify EC2 Instance
 
 After launching the EC2 instance, verify that the instance is running.
 
@@ -120,7 +113,10 @@ Linux
 Region:
 
 us-east-1
-Step 3 - Open AWS Backup
+
+---
+
+# Step 3 - Open AWS Backup
 
 From the AWS Management Console, search:
 
@@ -133,7 +129,9 @@ us-east-1
 
 AWS Backup is used to automate the backup and cross-region replication process.
 
-Step 4 - Create Primary Backup Vault
+---
+
+# Step 4 - Create Primary Backup Vault
 
 Navigate to:
 
@@ -162,7 +160,9 @@ Primary Vault
 | Purpose       | Primary backup storage     |
 | Resource      | EC2                        |
 
-Step 5 - Create DR Backup Vault
+---
+
+# Step 5 - Create DR Backup Vault
 
 Change the AWS region to:
 
@@ -189,7 +189,10 @@ DR Vault
 | Backup Source | `us-east-1`           |
 
 The DR vault is the destination for cross-region backup copies.
-Step 6 - Create Backup Plan
+
+---
+
+# Step 6 - Create Backup Plan
 
 Return to:
 
@@ -212,7 +215,10 @@ Use the following configuration.
 
 Backup Plan
 EC2-Cross-Region-Backup-Plan
-Step 7 - Configure Backup Rule
+
+---
+
+# Step 7 - Configure Backup Rule
 
 Create a backup rule:
 
@@ -257,7 +263,10 @@ Therefore, the schedule appears as:
 
 Daily at 05:40 PM
 Asia/Calcutta (UTC+05:30)
-Step 8 - Configure Cross-Region Copy
+
+---
+
+# Step 8 - Configure Cross-Region Copy
 
 Inside the backup rule, locate:
 
@@ -322,7 +331,9 @@ Remove any duplicate copy action.
 
 Save the rule again.
 
-Step 9 - Assign EC2 Resource
+---
+
+# Step 9 - Assign EC2 Resource
 
 Open the backup plan:
 
@@ -369,7 +380,10 @@ EC2
         │
         ▼
 i-04cfe745666331faf
-Step 10 - Verify Backup Plan
+
+---
+
+# Step 10 - Verify Backup Plan
 
 After creating the backup plan, the plan should show:
 
@@ -386,7 +400,9 @@ EC2-Primary-Backup-Vault
 The destination should show:
 
 EC2-DR-Backup-Vault
-Final Backup Plan Configuration
+
+Final Backup Plan Configuration :
+
 | Configuration      | Value                        |
 | ------------------ | ---------------------------- |
 | Plan Name          | EC2-Cross-Region-Backup-Plan |
@@ -405,7 +421,9 @@ Final Backup Plan Configuration
 | Backup Retention   | 7 days                       |
 | Copy Retention     | 7 days                       |
 
-Step 11 - Create On-Demand Backup
+---
+
+# Step 11 - Create On-Demand Backup
 
 Before waiting for the scheduled backup, an on-demand backup can be created to test the configuration.
 
@@ -445,7 +463,9 @@ Retention:
 
 Start the backup.
 
-Step 12 - Monitor Backup Job
+---
+
+# Step 12 - Monitor Backup Job
 
 Navigate to:
 
@@ -489,7 +509,10 @@ EC2-Primary-Backup-Vault
 
 Retention:
 7 days
-Step 13 - Verify Primary Recovery Point
+
+---
+
+# Step 13 - Verify Primary Recovery Point
 
 Navigate to:
 
@@ -530,7 +553,10 @@ image/ami-04cb5c08e2b115b12
 with status:
 
 Completed
-Step 14 - Verify Cross-Region Copy
+
+---
+
+# Step 14 - Verify Cross-Region Copy
 
 Now switch to:
 
@@ -642,7 +668,10 @@ This indicates that the schedule includes:
 
 EC2 backup
 Cross-region copy
-Step 17 - Disaster Recovery
+
+---
+
+# Step 17 - Disaster Recovery
 
 If the primary EC2 instance becomes unavailable, the recovery point stored in:
 
@@ -683,7 +712,8 @@ Restore
     │
     ▼
 EC2 in us-west-1
-Verification Checklist
+
+# Verification Checklist
 
 The following checklist was used to verify the project.
 
@@ -769,8 +799,12 @@ image/ami-06e2ca6440b6a7f4a
 Status:
 
 Completed
-⚠️ Troubleshooting
-Problem 1 - Recovery Point Not Showing
+
+---
+
+# Troubleshooting
+
+### Problem 1 - Recovery Point Not Showing
 
 If the recovery point is not immediately visible, check:
 
@@ -786,7 +820,7 @@ Do not check the recovery vault immediately while the backup job is still runnin
 
 Refresh the page after the backup job completes.
 
-Problem 2 - Copy Job Not Showing
+### Problem 2 - Copy Job Not Showing
 
 Cross-region copy can take additional time after the primary backup completes.
 
@@ -803,7 +837,8 @@ us-west-1
 
 Destination Vault:
 EC2-DR-Backup-Vault
-Problem 3 - Duplicate CopyActions
+
+### Problem 3 - Duplicate CopyActions
 
 Error:
 
@@ -818,7 +853,7 @@ EC2-DR-Backup-Vault
 
 Remove duplicate copy actions and save the rule.
 
-Problem 4 - Scheduled Backup Shows Future Date
+### Problem 4 - Scheduled Backup Shows Future Date
 
 AWS Backup schedules are based on the configured schedule and current time.
 
@@ -834,7 +869,7 @@ Aug 13, 2026 at 17:40
 
 This is normal if today's scheduled execution time has already passed.
 
-🔐 Backup Retention
+# Backup Retention
 
 The project uses:
 
@@ -847,7 +882,8 @@ The cross-region copied recovery point also uses:
 7 days
 
 Therefore, recovery points older than the configured retention period are automatically expired according to AWS Backup lifecycle management.
-Conclusion
+
+# Conclusion :
 
 This project successfully demonstrates the implementation of a reliable cross-region backup and disaster recovery solution for an Amazon EC2 instance using AWS Backup. The solution was designed to protect an EC2 workload running in the US East (N. Virginia) region (us-east-1) by automatically creating scheduled backups and maintaining a separate copy in the US West (N. California) region (us-west-1).
 
