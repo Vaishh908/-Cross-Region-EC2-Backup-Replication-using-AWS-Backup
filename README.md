@@ -686,9 +686,9 @@ Cross-region copy
 
 # Results
 
-The project successfully demonstrated cross-region EC2 backup replication using AWS Backup. The EC2 instance i-04cfe745666331faf was successfully backed up to the EC2-Primary-Backup-Vault in the us-east-1 (US East – N. Virginia) region. The backup job completed successfully with a Completed status, Success message, EC2 resource type, and a retention period of 7 days. A primary recovery point image/ami-00222ba82661e72f7 was also successfully generated.
+The project successfully demonstrated cross-region EC2 backup replication using AWS Backup. The EC2 instance i-04cfe745666331faf was successfully backed up to the EC2-Primary-Backup-Vault in the us-east-1 (US East – N. Virginia) region. The backup job completed successfully with a Completed status, a Success message, an EC2 resource type, and a 7-day retention period. A primary recovery point, image/ami-00222ba82661e72f7, was also successfully generated.
 
-The recovery point was then successfully copied from US East (N. Virginia) – us-east-1 to US West (N. California) – us-west-1, demonstrating successful cross-region replication. The replicated recovery point image/ami-06e2ca6440b6a7f4a was successfully available in the EC2-DR-Backup-Vault with a Completed status. This confirms that the implemented AWS Backup solution provides a reliable cross-region disaster recovery mechanism, allowing the EC2 workload to be restored in the DR region if the primary region becomes unavailable.
+The recovery point was then successfully copied from us-east-1 (US East – N. Virginia) to us-west-1 (US West – N. California), demonstrating successful cross-region replication. The replicated recovery point, image/ami-06e2ca6440b6a7f4a, was successfully stored in the EC2-DR-Backup-Vault with a Completed status. These results confirm that the implemented AWS Backup solution successfully provides cross-region disaster recovery for the EC2 workload, ensuring that a recovery point is available in the secondary region if the primary AWS Region becomes unavailable.
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1a9a1815-2af5-47c2-870c-c628c43ef349" />
 
