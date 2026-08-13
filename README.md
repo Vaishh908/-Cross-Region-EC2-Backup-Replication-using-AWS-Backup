@@ -690,6 +690,8 @@ The project successfully demonstrated cross-region EC2 backup replication using 
 
 The recovery point was then successfully copied from US East (N. Virginia) – us-east-1 to US West (N. California) – us-west-1, demonstrating successful cross-region replication. The replicated recovery point image/ami-06e2ca6440b6a7f4a was successfully available in the EC2-DR-Backup-Vault with a Completed status. This confirms that the implemented AWS Backup solution provides a reliable cross-region disaster recovery mechanism, allowing the EC2 workload to be restored in the DR region if the primary region becomes unavailable.
 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1a9a1815-2af5-47c2-870c-c628c43ef349" />
+
 ---
 
 # Conclusion :
