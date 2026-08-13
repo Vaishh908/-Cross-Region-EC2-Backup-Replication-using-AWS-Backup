@@ -107,7 +107,7 @@ Select:
 
 Launch Instance
 
-Configure the instance.
+### Configure the instance.
 
 | Setting       | Value             |
 | ------------- | ----------------- |
@@ -137,15 +137,13 @@ us-east-1
 
 AWS Backup is used to automate the backup and cross-region replication process.
 
- Create Primary Backup Vault
+Create Primary Backup Vault
 
 Navigate to:
 
-AWS Backup
-    ↓
-Backup vaults
-    ↓
-Create backup vault
+- AWS Backup
+- Backup vaults
+- Create backup vault
 
 Create the following vault:
 
@@ -157,7 +155,7 @@ us-east-1
 
 The vault is used to store the EC2 backup recovery points in the primary region.
 
-Primary Vault
+### Primary Vault
 
 | Configuration | Value                      |
 | ------------- | -------------------------- |
@@ -166,7 +164,7 @@ Primary Vault
 | Purpose       | Primary backup storage     |
 | Resource      | EC2                        |
 
-<img width="1920" height="1080" alt="Screenshot 2026-08-12 162914" src="https://github.com/user-attachments/assets/85953505-8f3c-4a16-bf26-55a5e2ae0ede" />
+<img width="1920" height="1080" alt="Screenshot 2026-08-12 162854" src="https://github.com/user-attachments/assets/a36bf458-bb6b-4370-ba7d-c602547ed5da" />
 
 ---
 
@@ -179,16 +177,16 @@ us-west-1
 
 Navigate to:
 
-AWS Backup
-    ↓
-Backup vaults
-    ↓
-Create backup vault
+- AWS Backup
+- Backup vaults
+- Create backup vault
 
 Create:
 
 EC2-DR-Backup-Vault
-DR Vault
+
+### DR Vault
+
 | Configuration | Value                 |
 | ------------- | --------------------- |
 | Vault Name    | `EC2-DR-Backup-Vault` |
@@ -211,11 +209,9 @@ us-east-1
 
 Open:
 
-AWS Backup
-    ↓
-Backup plans
-    ↓
-Create backup plan
+- AWS Backup
+- Backup plans
+- Create backup plan
 
 Select:
 
@@ -236,7 +232,8 @@ EC2-Cross-Region-Backup-Plan
 Create a backup rule:
 
 Daily-EC2-Backup
-Backup Rule Configuration
+
+### Backup Rule Configuration
 
 | Setting           | Value                      |
 | ----------------- | -------------------------- |
@@ -303,7 +300,7 @@ Configure retention:
 
 1 week / 7 days
 
-Copy Configuration
+### Copy Configuration
 
 | Setting               | Value                      |
 | --------------------- | -------------------------- |
@@ -390,12 +387,9 @@ Do not add any exclusion.
 
 The final assignment is:
 
-EC2-Backup-Assignment
-        │
-
-       EC2
-        │
-i-04cfe745666331faf
+- EC2-Backup-Assignment
+- EC2
+- i-04cfe745666331faf
 
 
 <img width="1920" height="1080" alt="Screenshot 2026-08-12 164721" src="https://github.com/user-attachments/assets/fda09137-0265-469c-93d6-789714484afe" />
@@ -420,7 +414,7 @@ The destination should show:
 
 EC2-DR-Backup-Vault
 
-Final Backup Plan Configuration :
+### Final Backup Plan Configuration :
 
 | Configuration      | Value                        |
 | ------------------ | ---------------------------- |
@@ -450,11 +444,9 @@ Before waiting for the scheduled backup, an on-demand backup can be created to t
 
 Navigate to:
 
-AWS Backup
-    ↓
-Protected resources
-    ↓
-Create on-demand backup
+- AWS Backup
+- Protected resources
+- Create on-demand backup
 
 Select:
 
@@ -490,11 +482,9 @@ Start the backup.
 
 Navigate to:
 
-AWS Backup
-    ↓
-Jobs
-    ↓
-Backup jobs
+- AWS Backup
+- Jobs
+- Backup jobs
 
 A successful backup job should show:
 
@@ -539,13 +529,10 @@ Retention:
 
 Navigate to:
 
-AWS Backup
-    ↓
-Backup vaults
-    ↓
-EC2-Primary-Backup-Vault
-    ↓
-Recovery points
+- AWS Backup
+- Backup vaults
+- EC2-Primary-Backup-Vault
+- Recovery points
 
 The recovery point should appear.
 
@@ -588,11 +575,9 @@ us-west-1
 
 Open:
 
-AWS Backup
-    ↓
-Jobs
-    ↓
-Copy jobs
+- AWS Backup
+- Jobs
+- Copy jobs
 
 The cross-region copy should eventually appear.
 
@@ -606,20 +591,14 @@ us-west-1
 
 Destination Vault:
 EC2-DR-Backup-Vault
-Copy Flow
-EC2 Instance
-     │
-     ▼
-Primary Backup
-     │
-     ▼
-Primary Recovery Point
-     │
-     ▼
-Cross-Region Copy
-     │
-     ▼
-DR Recovery Point
+
+### Copy Flow
+
+- EC2 Instance
+- Primary Backup
+- Primary Recovery Point
+- Cross-Region Copy
+- DR Recovery Point
 
 <img width="1920" height="1080" alt="Screenshot 2026-08-12 183858" src="https://github.com/user-attachments/assets/14583452-a8d0-47ef-bec7-cdc632af36ff" />
 
@@ -634,11 +613,9 @@ us-west-1
 
 Open:
 
-AWS Backup
-    ↓
-Backup vaults
-    ↓
-EC2-DR-Backup-Vault
+- AWS Backup
+- Backup vaults
+- EC2-DR-Backup-Vault
 
 Open:
 
