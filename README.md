@@ -144,7 +144,7 @@ Launch the instance.
 
 ---
 
-# Step 2 - Open AWS Backup
+# Step 2 - Create Primary Backup Vault
 
 From the AWS Management Console, search:
 
