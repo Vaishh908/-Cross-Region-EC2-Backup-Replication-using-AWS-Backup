@@ -857,7 +857,7 @@ EC2-DR-Backup-Vault
 
 ---
 
-# Step 15 - Verify DR Recovery Point
+# Step 13 - Verify DR Recovery Point
 
 Switch to:
 
@@ -905,7 +905,7 @@ us-west-1
 
 ---
 
-# Step 16 - Verify Scheduled Backup
+# Step 14 - Verify Scheduled Backup
 
 The backup plan was configured for daily execution.
 
@@ -934,91 +934,6 @@ EC2 backup
 Cross-region copy
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d30b2eb6-1f61-45b5-b147-a09e3a73e9ae" />
-
----
-# Summary 
-
-### Steps to Configure Cross-Region Backup
-
-- Launched a Linux-based EC2 instance in the primary AWS Region, us-east-1 (US East – N. Virginia).
-- Created the primary AWS Backup vault:
-- EC2-Primary-Backup-Vault
-- Created a second AWS Backup vault in the disaster recovery region, us-west-1 (US West – N. California):
-- EC2-DR-Backup-Vault
-- Created an AWS Backup plan named:
-- EC2-Cross-Region-Backup-Plan
-- Configured a daily backup rule named:
-- Daily-EC2-Backup
-- Configured the backup schedule using the Asia/Calcutta (UTC+05:30) time zone.
-- Configured a 7-day retention period for the backup recovery points.
-
-   - Assigned the EC2 instance:
-   - i-04cfe745666331faf
-
-    to the backup plan.
-
-- Enabled the cross-region backup copy feature in the backup rule.
-
-- Configured us-west-1 as the destination region and:
-       -EC2-DR-Backup-Vault
-
-    as the destination backup vault.
-
-- Triggered an on-demand backup to immediately test the configuration.
-- Monitored the backup job under AWS Backup → Backup Jobs until the job completed successfully.
-- Verified that a recovery point was created in:
-   - EC2-Primary-Backup-Vault
-- Monitored the cross-region copy job until it reached Completed status.
-- Switched to us-west-1 and verified that the replicated EC2 recovery point was available in:
-   - EC2-DR-Backup-Vault
-
-# Reason for Cross-Region Backup Replication
-
-Cross-region backup replication was implemented to provide an additional layer of protection for the EC2 instance.
-
-The primary backup is stored in us-east-1, while a replicated recovery point is maintained in us-west-1. Storing backup data in a separate AWS Region helps provide an additional recovery option if the primary region becomes unavailable or experiences a regional failure.
-
-# Benefits of Cross-Region Backup Replication
-
-The implemented solution provides the following benefits:
-
-- Disaster Recovery: Provides a recovery point in a separate AWS Region.
-- Geographical Redundancy: Keeps backup data away from the primary region.
-- Regional Failure Protection: Provides an additional recovery option during a primary-region outage.
-- Data Protection: Maintains an additional copy of the EC2 backup.
-- Business Continuity: Helps maintain recovery readiness for the EC2 workload.
-- Automated Backups: Daily backups are created according to the configured backup rule.
-- Automated Replication: Recovery points are copied to the secondary AWS Region.
-- Retention Management: Backup recovery points are retained according to the configured 7-day retention period.
-- Centralized Management: AWS Backup provides a centralized way to manage backup plans, vaults, backup jobs, copy jobs, and recovery points.
-
-# Issues Encountered and Resolutions
-
-### 1. Duplicate CopyActions Error
-
-Issue:
-A duplicate copy action error was encountered while configuring the cross-region backup rule.
-
-Duplicate CopyActions provided in backupRule.
-
-Resolution:
-The backup rule configuration was reviewed and the duplicate copy action was removed. Only the required cross-region copy configuration to us-west-1 was retained.
-
-### 2. Recovery Point Not Immediately Visible
-
-Issue:
-After initiating the backup, the recovery point was not immediately visible in the backup vault.
-
-Resolution:
-The backup job was monitored under AWS Backup → Backup Jobs until its status changed to Completed. The recovery point was then verified in EC2-Primary-Backup-Vault.
-
-### 3. Cross-Region Recovery Point Delay
-
-Issue:
-The replicated recovery point was not immediately visible in the destination backup vault.
-
-Resolution:
-The Copy Jobs section was monitored until the cross-region copy operation completed successfully. The destination region was then opened and the recovery point was verified in EC2-DR-Backup-Vault.
 
 ---
 
