@@ -994,7 +994,7 @@ The implemented solution provides the following benefits:
 
 # Issues Encountered and Resolutions
 
-1. Duplicate CopyActions Error
+### 1. Duplicate CopyActions Error
 
 Issue:
 A duplicate copy action error was encountered while configuring the cross-region backup rule.
@@ -1004,7 +1004,7 @@ Duplicate CopyActions provided in backupRule.
 Resolution:
 The backup rule configuration was reviewed and the duplicate copy action was removed. Only the required cross-region copy configuration to us-west-1 was retained.
 
-2. Recovery Point Not Immediately Visible
+### 2. Recovery Point Not Immediately Visible
 
 Issue:
 After initiating the backup, the recovery point was not immediately visible in the backup vault.
@@ -1012,7 +1012,7 @@ After initiating the backup, the recovery point was not immediately visible in t
 Resolution:
 The backup job was monitored under AWS Backup → Backup Jobs until its status changed to Completed. The recovery point was then verified in EC2-Primary-Backup-Vault.
 
-3. Cross-Region Recovery Point Delay
+### 3. Cross-Region Recovery Point Delay
 
 Issue:
 The replicated recovery point was not immediately visible in the destination backup vault.
