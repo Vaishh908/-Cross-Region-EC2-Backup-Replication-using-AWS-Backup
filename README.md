@@ -50,269 +50,36 @@ Before starting the project, ensure the following requirements are available:
 ---
 # Installation Steps
 
-This project is implemented using AWS Management Console services. The solution does not require any additional application framework or local software installation because AWS Backup provides the backup scheduling, backup storage, and cross-region replication functionality.
+This project does not require any local software installation. The complete solution is configured using the AWS Management Console.
 
-### Step 1: Launch the EC2 Instance
+## Step 1: Prepare AWS Account
 
 1. Sign in to the AWS Management Console.
-2. Open the **Amazon EC2** service.
-3. Select the primary AWS Region:
-   `us-east-1 (US East - N. Virginia)`
-4. Launch a Linux-based EC2 instance.
-5. Configure the instance using the required settings:
-   - Instance Type: `t3.micro`
-   - Architecture: 64-bit
-   - Operating System: Ubuntu/Linux
-   - Storage: Amazon EBS
-   - Key Pair: Configured key pair
-6. Launch the instance.
-7. Verify that the EC2 instance is in the `Running` state.
+2. Verify access to Amazon EC2, AWS Backup, IAM, and related services.
+3. Ensure the required IAM permissions are available.
 
-### Step 2: Prepare the EC2 Instance
+## Step 2: Prepare the EC2 Instance
 
-1. Connect to the EC2 instance using SSH.
-2. Verify that the instance is accessible.
-3. Create or upload sample files if required for backup testing.
-4. Confirm that the EC2 instance is functioning correctly before configuring AWS Backup.
+1. Launch a Linux-based EC2 instance in `us-east-1`.
+2. Use instance type `t3.micro`.
+3. Ensure the instance uses Amazon EBS storage.
+4. Verify that the instance is in the `Running` state.
 
-### Step 3: Open AWS Backup
+## Step 3: Prepare AWS Regions
 
-1. Open the **AWS Backup** service from the AWS Management Console.
-2. Make sure the selected region is:
-   `us-east-1`
-3. Open **Backup vaults**.
+Use the following regions:
 
-### Step 4: Create the Primary Backup Vault
+- Primary Region: `us-east-1`
+- Disaster Recovery Region: `us-west-1`
 
-1. Select **Create backup vault**.
-2. Enter the backup vault name:
+## Step 4: Prepare Backup Vaults
 
-   `EC2-Primary-Backup-Vault`
+Create the required AWS Backup vaults:
 
-3. Keep the required default settings.
-4. Create the backup vault.
-5. Verify that the vault is available in `us-east-1`.
+- `EC2-Primary-Backup-Vault` in `us-east-1`
+- `EC2-DR-Backup-Vault` in `us-west-1`
 
-The primary backup vault is used to store the EC2 recovery point in the source region.
-
-### Step 5: Create the Destination Backup Vault
-
-1. Change the AWS Region to:
-   `us-west-1 (US West - N. California)`
-2. Open **AWS Backup**.
-3. Select **Backup vaults**.
-4. Select **Create backup vault**.
-5. Enter:
-
-   `EC2-DR-Backup-Vault`
-
-6. Create the vault.
-7. Verify that the destination vault is available in `us-west-1`.
-
-This vault is used to store the replicated recovery point for disaster recovery.
-
-### Step 6: Create the Backup Plan
-
-1. Switch back to the primary region:
-   `us-east-1`
-2. Open **AWS Backup**.
-3. Select **Backup plans**.
-4. Select **Create backup plan**.
-5. Create a new backup plan.
-6. Enter the backup plan name:
-
-   `EC2-Cross-Region-Backup-Plan`
-
-7. Create the backup plan.
-
-### Step 7: Configure the Backup Rule
-
-Create a backup rule inside the backup plan.
-
-Use the following configuration:
-
-- Backup Rule Name:
-  `Daily-EC2-Backup`
-- Backup Frequency:
-  `Daily`
-- Backup Vault:
-  `EC2-Primary-Backup-Vault`
-- Time Zone:
-  `Asia/Calcutta (UTC+05:30)`
-- Retention:
-  `7 days`
-
-The backup rule automatically creates an EC2 recovery point according to the configured schedule.
-
-### Step 8: Configure Cross-Region Backup Copy
-
-Inside the `Daily-EC2-Backup` rule:
-
-1. Locate the **Copy to destination** or cross-region copy configuration.
-2. Enable the backup copy.
-3. Select the destination Region:
-
-   `us-west-1`
-
-4. Select the destination backup vault:
-
-   `EC2-DR-Backup-Vault`
-
-5. Configure the copy retention period:
-
-   `7 days`
-
-6. Save the backup rule.
-
-The configuration now creates the backup in the primary region and copies the recovery point to the destination region.
-
-### Step 9: Assign the EC2 Instance
-
-1. Open the backup plan:
-
-   `EC2-Cross-Region-Backup-Plan`
-
-2. Open the resource assignment section.
-3. Create a resource assignment.
-4. Select the resource type:
-
-   `EC2`
-
-5. Select the EC2 instance:
-
-   `i-04cfe745666331faf`
-
-6. Use the required AWS Backup IAM service role.
-7. Save the resource assignment.
-
-The EC2 instance is now protected by the backup plan.
-
-### Step 10: Verify the Backup Plan
-
-Before starting the backup, verify the complete configuration:
-
-- Backup Plan:
-  `EC2-Cross-Region-Backup-Plan`
-- Backup Rule:
-  `Daily-EC2-Backup`
-- Source Region:
-  `us-east-1`
-- Primary Backup Vault:
-  `EC2-Primary-Backup-Vault`
-- Backup Frequency:
-  Daily
-- Retention:
-  7 days
-- Destination Region:
-  `us-west-1`
-- Destination Backup Vault:
-  `EC2-DR-Backup-Vault`
-- EC2 Resource:
-  `i-04cfe745666331faf`
-
-### Step 11: Trigger an On-Demand Backup
-
-For immediate validation:
-
-1. Open **AWS Backup**.
-2. Select **Protected resources** or the EC2 resource.
-3. Select the EC2 instance.
-4. Choose **Create on-demand backup**.
-5. Select:
-   `EC2-Primary-Backup-Vault`
-6. Configure the required retention period.
-7. Start the backup.
-
-This allows the backup configuration to be tested without waiting for the scheduled daily backup.
-
-### Step 12: Monitor the Backup Job
-
-1. Open:
-
-   **AWS Backup → Jobs → Backup jobs**
-
-2. Locate the EC2 backup job.
-3. Monitor the job until it reaches:
-
-   `Completed`
-
-4. Verify that the backup job does not show an error.
-5. Confirm that a recovery point has been created.
-
-### Step 13: Verify the Primary Recovery Point
-
-1. Open:
-
-   **AWS Backup → Backup vaults**
-
-2. Select:
-
-   `EC2-Primary-Backup-Vault`
-
-3. Open **Recovery points**.
-4. Verify that the EC2 recovery point is available.
-
-This confirms that the EC2 instance was successfully backed up in the primary region.
-
-### Step 14: Verify the Cross-Region Copy Job
-
-1. Open:
-
-   **AWS Backup → Jobs → Copy jobs**
-
-2. Locate the copy job associated with the EC2 backup.
-3. Verify the source region:
-
-   `us-east-1`
-
-4. Verify the destination region:
-
-   `us-west-1`
-
-5. Wait until the copy job reaches:
-
-   `Completed`
-
-This confirms that the recovery point was successfully replicated to the secondary region.
-
-### Step 15: Verify the Destination Recovery Point
-
-1. Switch the AWS Region to:
-
-   `us-west-1`
-
-2. Open **AWS Backup**.
-3. Select **Backup vaults**.
-4. Open:
-
-   `EC2-DR-Backup-Vault`
-
-5. Select **Recovery points**.
-6. Verify that the replicated EC2 recovery point is available.
-
-The presence of the recovery point confirms successful cross-region backup replication.
-
-### Step 16: Verify the Scheduled Backup
-
-1. Return to the primary region:
-   `us-east-1`
-2. Open:
-
-   **AWS Backup → Backup plans**
-
-3. Open:
-
-   `EC2-Cross-Region-Backup-Plan`
-
-4. Open:
-
-   `Daily-EC2-Backup`
-
-5. Verify that the daily schedule is enabled.
-6. Verify the configured retention period.
-7. Verify that the cross-region copy configuration remains enabled.
-
-The final configuration provides automated daily EC2 backup and cross-region replication.
+After these resources are prepared, proceed to the implementation phase.
 
 ---
 
