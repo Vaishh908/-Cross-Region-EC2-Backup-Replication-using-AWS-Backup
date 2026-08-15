@@ -712,7 +712,7 @@ The recovery point was then successfully copied from us-east-1 (US East – N. V
 
 ---
 
-# Conclusion :
+# Conclusion 
 
 This project successfully demonstrates the implementation of a reliable cross-region backup and disaster recovery solution for an Amazon EC2 instance using AWS Backup. The solution was designed to protect an EC2 workload running in the US East (N. Virginia) region (us-east-1) by automatically creating scheduled backups and maintaining a separate copy in the US West (N. California) region (us-west-1).
 
